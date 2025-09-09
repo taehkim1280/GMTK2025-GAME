@@ -1,0 +1,122 @@
+[gd_scene load_steps=16 format=3 uid="uid://dujn00mplwvx1"]
+
+[ext_resource type="Script" uid="uid://dubywbvhpljv4" path="res://vehicle.gd" id="1_andsp"]
+[ext_resource type="Material" uid="uid://e1w0ghh7bsd" path="res://purple.tres" id="2_0ak5w"]
+[ext_resource type="PackedScene" uid="uid://deqe17cjd0dw6" path="res://assets/playership.glb" id="2_j5owu"]
+[ext_resource type="Material" uid="uid://2kfgny2wil4i" path="res://red.tres" id="3_j5owu"]
+[ext_resource type="Material" uid="uid://cmtg0bnf5ma7c" path="res://green.tres" id="4_cgfxq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_owshx"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_andsp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_owshx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_andsp"]
+radius = 0.593696
+height = 5.9898
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgfxq"]
+size = Vector3(2.4549, 1.56836, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_andsp"]
+inner_radius = 0.501
+outer_radius = 3.036
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a7jys"]
+material = ExtResource("2_0ak5w")
+top_radius = 1.49
+bottom_radius = 1.49
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kxndi"]
+material = ExtResource("3_j5owu")
+top_radius = 1.49
+bottom_radius = 1.49
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lhc0k"]
+material = ExtResource("4_cgfxq")
+top_radius = 1.49
+bottom_radius = 1.49
+
+[sub_resource type="BoxMesh" id="BoxMesh_andsp"]
+
+[node name="Vehicle" type="CharacterBody3D"]
+script = ExtResource("1_andsp")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Pivot2" type="Node3D" parent="Pivot"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="playership" parent="Pivot/Pivot2" instance=ExtResource("2_j5owu")]
+transform = Transform3D(-1.61732e-08, 0, 0.37, 0, 0.37, 0, -0.37, 0, -1.61732e-08, 0, 0, 0)
+
+[node name="DebugBody" type="Node3D" parent="Pivot/Pivot2"]
+visible = false
+
+[node name="Body" type="MeshInstance3D" parent="Pivot/Pivot2/DebugBody"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_owshx")
+skeleton = NodePath("../../..")
+
+[node name="Spoiler" type="MeshInstance3D" parent="Pivot/Pivot2/DebugBody"]
+transform = Transform3D(-0.0825375, -0.445481, 0, 0.231511, -0.158821, 0, 0, 0, 1, 0.771299, 0.803417, 0)
+mesh = SubResource("SphereMesh_andsp")
+skeleton = NodePath("../../..")
+
+[node name="WheelFrontRight" type="MeshInstance3D" parent="Pivot/Pivot2/DebugBody"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.227, -0.658491, -0.144508, 0.549943)
+mesh = SubResource("SphereMesh_owshx")
+skeleton = NodePath("../../..")
+
+[node name="WheelFrontLeft" type="MeshInstance3D" parent="Pivot/Pivot2/DebugBody"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.227, -0.658, -0.145, -0.55)
+mesh = SubResource("SphereMesh_owshx")
+skeleton = NodePath("../../..")
+
+[node name="WheelRearRight" type="MeshInstance3D" parent="Pivot/Pivot2/DebugBody"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.227, 0.658, -0.145, 0.55)
+mesh = SubResource("SphereMesh_owshx")
+skeleton = NodePath("../../..")
+
+[node name="WheelRearLeft" type="MeshInstance3D" parent="Pivot/Pivot2/DebugBody"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.227, 0.658, -0.145, -0.55)
+mesh = SubResource("SphereMesh_owshx")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_andsp")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, -0.00924683, 4.04191e-10, -1.43734)
+shape = SubResource("BoxShape3D_cgfxq")
+
+[node name="Indicators" type="Node3D" parent="."]
+visible = false
+
+[node name="TurnIndicator" type="Node3D" parent="Indicators"]
+top_level = true
+
+[node name="ring" type="MeshInstance3D" parent="Indicators/TurnIndicator"]
+mesh = SubResource("TorusMesh_andsp")
+skeleton = NodePath("../..")
+
+[node name="center" type="MeshInstance3D" parent="Indicators/TurnIndicator"]
+mesh = SubResource("CylinderMesh_a7jys")
+skeleton = NodePath("../..")
+
+[node name="AxisIndicator" type="Node3D" parent="Indicators"]
+top_level = true
+
+[node name="click" type="MeshInstance3D" parent="Indicators/AxisIndicator"]
+mesh = SubResource("CylinderMesh_kxndi")
+skeleton = NodePath("../..")
+
+[node name="originalPos" type="MeshInstance3D" parent="Indicators/AxisIndicator"]
+mesh = SubResource("CylinderMesh_lhc0k")
+skeleton = NodePath("../..")
+
+[node name="normal" type="MeshInstance3D" parent="Indicators/AxisIndicator"]
+mesh = SubResource("BoxMesh_andsp")
+skeleton = NodePath("../..")

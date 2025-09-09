@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://cqx383sjwk3tc"]
+
+[ext_resource type="PackedScene" uid="uid://fewy1s7t8te2" path="res://ui.tscn" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dujn00mplwvx1" path="res://vehicle.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://ea0fldb32vvy" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="Shader" uid="uid://div153d7ej0ve" path="res://main.gdshader" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://f4lya5iy40fe" path="res://test_level.tscn" id="4_1bvp3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0xm2m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h2yge"]
+seamless = true
+noise = SubResource("FastNoiseLite_0xm2m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
+render_priority = 0
+shader = ExtResource("2_0xm2m")
+shader_parameter/NOISE_PATTERN = SubResource("NoiseTexture2D_h2yge")
+shader_parameter/color_in = Color(0.122252, 0.122252, 0.122252, 1)
+shader_parameter/noise_scale = 15.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+material = SubResource("ShaderMaterial_h2yge")
+size = Vector3(600, 2, 600)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_lquwl")
+
+[node name="UI" parent="." instance=ExtResource("1_h2yge")]
+
+[node name="Vehicle" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="Camera3D" type="Camera3D" parent="Vehicle"]
+transform = Transform3D(-9.31782e-09, 0.977016, -0.213167, 4.27067e-08, 0.213167, 0.977016, 1, 8.88178e-16, -4.37114e-08, -29.0881, 89.2427, 0)
+
+[node name="Terrain" type="Node" parent="."]
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("BoxMesh_0xm2m")
+skeleton = NodePath("")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Terrain"]
+transform = Transform3D(0.970321, -0.0878926, -0.225282, 0.24182, 0.352675, 0.90396, -1.73176e-08, -0.931609, 0.363463, -8.95309, 8.21216, 0)
+
+[node name="debugobjects" type="Node3D" parent="Terrain"]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/debugobjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 50)
+mesh = SubResource("BoxMesh_h2yge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Terrain/debugobjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -50)
+mesh = SubResource("BoxMesh_h2yge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Terrain/debugobjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -50)
+mesh = SubResource("BoxMesh_h2yge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Terrain/debugobjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 50)
+mesh = SubResource("BoxMesh_h2yge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Terrain/debugobjects"]
+mesh = SubResource("BoxMesh_h2yge")
+skeleton = NodePath("../..")
+
+[node name="TestLevel" parent="." instance=ExtResource("4_1bvp3")]
+
+[connection signal="collected" from="Vehicle" to="." method="_on_vehicle_collected"]
+[connection signal="crashed" from="Vehicle" to="." method="_on_vehicle_crashed"]
+[connection signal="final_destination_reached" from="Vehicle" to="." method="_on_vehicle_final_destination_reached"]

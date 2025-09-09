@@ -1,0 +1,135 @@
+[gd_scene load_steps=18 format=3 uid="uid://f4lya5iy40fe"]
+
+[ext_resource type="PackedScene" uid="uid://sclifuhgeg5x" path="res://final_destination.tscn" id="1_1c2mv"]
+[ext_resource type="PackedScene" uid="uid://c8p02t8m4rdj7" path="res://delivery_destination.tscn" id="1_gojnm"]
+[ext_resource type="PackedScene" uid="uid://b10e7at5drl4t" path="res://assets/asteroid1.glb" id="2_f7g2b"]
+[ext_resource type="PackedScene" uid="uid://gp2xi1orfqf8" path="res://assets/asteroid3.glb" id="3_6emce"]
+[ext_resource type="PackedScene" uid="uid://d3j3dssgrljjx" path="res://assets/asteroid2.glb" id="4_lowby"]
+[ext_resource type="PackedScene" uid="uid://tjsaodndgyce" path="res://assets/asteroid4.glb" id="5_58smv"]
+[ext_resource type="PackedScene" uid="uid://dee5a3nbfgya8" path="res://assets/asteroid5.glb" id="6_a25ih"]
+[ext_resource type="PackedScene" uid="uid://obpr1ky2ub3a" path="res://assets/asteroid6.glb" id="7_38et7"]
+[ext_resource type="PackedScene" uid="uid://dispken62d0ug" path="res://assets/bigspaceship.glb" id="8_b7ax5"]
+[ext_resource type="PackedScene" uid="uid://chf0dgctf8rbi" path="res://assets/mainspacestation.glb" id="9_lowby"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4bgwg"]
+radius = 3.38452
+height = 11.6572
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gojnm"]
+size = Vector3(8.03873, 3, 7.55341)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2hfll"]
+radius = 2.58431
+height = 9.02017
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7fqlb"]
+radius = 5.97903
+height = 16.4636
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e8hb2"]
+radius = 2.3398
+height = 6.44433
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ga11v"]
+radius = 9.09348
+height = 21.4707
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_58smv"]
+height = 59.4744
+radius = 23.6514
+
+[node name="TestLevel" type="Node3D"]
+transform = Transform3D(3.16, 0, 0, 0, 3.16, 0, 0, 0, 3.16, 0, 0, 0)
+
+[node name="FinalDestination" parent="." instance=ExtResource("1_1c2mv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.3725, 0, 31.6956)
+
+[node name="Obstacles" type="Node3D" parent="." groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.56183, 0, 20.6658)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Obstacles" groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.35525, 0, 0)
+
+[node name="asteroid1" parent="Obstacles/StaticBody3D" instance=ExtResource("2_f7g2b")]
+transform = Transform3D(0.445, 0, 0, 0, -0.000636862, -0.445, 0, 0.445, -0.000636862, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/StaticBody3D" groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.66217, 0, -0.192444)
+shape = SubResource("CapsuleShape3D_4bgwg")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Obstacles" groups=["obstacle"]]
+transform = Transform3D(-0.0269796, 0, -0.999636, 0, 1, 0, 0.999636, 0, -0.0269796, 5.78056, 0, 6.82598)
+
+[node name="asteroid3" parent="Obstacles/StaticBody3D2" instance=ExtResource("3_6emce")]
+transform = Transform3D(0.055, 0, 2.32831e-10, 0, 0.055, 0, -2.32831e-10, 0, 0.055, 4.25718, 0, 2.10747)
+
+[node name="asteroid2" parent="Obstacles/StaticBody3D2" instance=ExtResource("4_lowby")]
+transform = Transform3D(0.359727, 0.00970435, -0.0101116, -0.00970412, -0.0149306, -0.359559, -0.0101119, 0.359559, -0.0146577, -0.691057, 0, 0.0186515)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/StaticBody3D2" groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27424, 0, 0.374508)
+shape = SubResource("BoxShape3D_gojnm")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Obstacles" groups=["obstacle"]]
+transform = Transform3D(1.725, 0, 0, 0, 1.725, 0, 0, 0, 1.725, 30.5509, 0, -9.67644)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/StaticBody3D3" groups=["obstacle"]]
+transform = Transform3D(0.965218, 0.261448, -1.14283e-08, 0, -4.37114e-08, -1, -0.261448, 0.965218, -4.2191e-08, 0, 0, 0.264872)
+shape = SubResource("CapsuleShape3D_2hfll")
+
+[node name="asteroid4" parent="Obstacles/StaticBody3D3" instance=ExtResource("5_58smv")]
+transform = Transform3D(0.295, 0, 0, 0, -0.157416, 0.24949, 0, -0.24949, -0.157416, 0, 0, 0)
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Obstacles" groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26.2248)
+
+[node name="asteroid5" parent="Obstacles/StaticBody3D4" instance=ExtResource("6_a25ih")]
+transform = Transform3D(0.722521, -0.599009, 0.345183, 0.691349, 0.626018, -0.360747, 0, 0.499289, 0.866435, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/StaticBody3D4" groups=["obstacle"]]
+transform = Transform3D(0.139173, -0.990268, -6.08345e-09, -4.37114e-08, 1.91069e-15, -1, 0.990268, 0.139173, -4.3286e-08, 4.75, 0, 1.44)
+shape = SubResource("CapsuleShape3D_7fqlb")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="Obstacles" groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5485, 0, -11.7068)
+
+[node name="asteroid6" parent="Obstacles/StaticBody3D5" instance=ExtResource("7_38et7")]
+transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, -1.05892, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/StaticBody3D5" groups=["obstacle"]]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 1.36156, 0, 2.37849)
+shape = SubResource("CapsuleShape3D_e8hb2")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="Obstacles" groups=["obstacle"]]
+transform = Transform3D(0.919163, 0, -0.393878, 0, 1, 0, 0.393878, 0, 0.919163, 51.3355, 0, 17.8362)
+
+[node name="bigspaceship" parent="Obstacles/StaticBody3D6" instance=ExtResource("8_b7ax5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/StaticBody3D6" groups=["obstacle"]]
+transform = Transform3D(-0.0639416, 0.997578, 0.0274002, 0.393878, -2.98023e-08, 0.919163, 0.916937, 0.0695649, -0.392924, 2.41861, 0, -0.18392)
+shape = SubResource("CapsuleShape3D_ga11v")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="Obstacles" groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2263, 0, 0)
+
+[node name="mainspacestation" parent="Obstacles/StaticBody3D7" instance=ExtResource("9_lowby")]
+transform = Transform3D(0.265, 0, 0, 0, 0.265, 0, 0, 0, 0.265, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/StaticBody3D7" groups=["obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.934, 0)
+shape = SubResource("CylinderShape3D_58smv")
+
+[node name="Deliveries" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.56183, 0, 20.6658)
+
+[node name="DeliveryDestination2" parent="Deliveries" instance=ExtResource("1_gojnm")]
+transform = Transform3D(-0.758953, 0, -0.651145, 0, 1, 0, 0.651145, 0, -0.758953, 10, 0, 0)
+
+[node name="DeliveryDestination4" parent="Deliveries" instance=ExtResource("1_gojnm")]
+transform = Transform3D(0.805184, 0, 0.593026, 0, 1, 0, -0.593026, 0, 0.805184, 16.2334, 0, 33.7743)
+
+[node name="DeliveryDestination3" parent="Deliveries" instance=ExtResource("1_gojnm")]
+transform = Transform3D(-0.0607001, 0, 0.998156, 0, 1, 0, -0.998156, 0, -0.0607001, -10, 0, -13)
+
+[node name="DeliveryDestination" parent="Deliveries" instance=ExtResource("1_gojnm")]
+transform = Transform3D(0.911145, 0, -0.412087, 0, 1, 0, 0.412087, 0, 0.911145, 3.81958, 0, -9.39458)
